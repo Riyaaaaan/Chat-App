@@ -14,22 +14,50 @@ class RegisterPage extends StatelessWidget {
 
   void register(BuildContext context) {
     final _auth = AuthService();
-    if (_pwController.text == _confirmpwController.text) {
-      try {
-        _auth.signUpwithEmailPassword(
-          _emailController.text,
-          _pwController.text,
-        );
-      } catch (e) {
-        showDialog(
-          context: context,
-          builder: (context) => AlertDialog(
-            title: Text(
-              e.toString(),
-            ),
+    final password = _pwController.text;
+    final confirmPassword = _confirmpwController.text;
+
+    // Password validation regex pattern
+    final RegExp passwordPattern = RegExp(
+      r'^(?=.*?[a-zA-Z])(?=.*?[0-9])(?=.*?[!@#$%^&*()_+]).{8,}$',
+    );
+
+    if (password != confirmPassword) {
+      showDialog(
+        context: context,
+        builder: (context) => const AlertDialog(
+          title: Text("Passwords do not match"),
+        ),
+      );
+      return;
+    }
+
+    if (!passwordPattern.hasMatch(password)) {
+      showDialog(
+        context: context,
+        builder: (context) => const AlertDialog(
+          title: Text(
+            "Password must contain at least 1 letter, 1 number, 1 special character, and be at least 8 characters long",
           ),
-        );
-      }
+        ),
+      );
+      return;
+    }
+
+    try {
+      _auth.signUpwithEmailPassword(
+        _emailController.text,
+        password,
+      );
+    } catch (e) {
+      showDialog(
+        context: context,
+        builder: (context) => AlertDialog(
+          title: Text(
+            e.toString(),
+          ),
+        ),
+      );
     }
   }
 

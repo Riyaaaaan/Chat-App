@@ -4,8 +4,8 @@ import 'package:flutter/material.dart';
 import '../../screens/home_screen.dart';
 import 'login_or_register.dart';
 
-class AuthGate extends StatelessWidget {
-  const AuthGate({super.key});
+class AuthPage extends StatelessWidget {
+  const AuthPage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -19,7 +19,7 @@ class AuthGate extends StatelessWidget {
           }
           //user is not logged in
           else {
-            return LoginOrRegister();
+            return const LoginOrRegister();
           }
         },
       ),
