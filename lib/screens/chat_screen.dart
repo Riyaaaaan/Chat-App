@@ -10,11 +10,11 @@ import '../services/auth/auth_service.dart';
 import '../themes/theme_provider.dart';
 
 class ChatPage extends StatefulWidget {
-  final String recieverEmail;
+  final String recieverName;
   final String recieverID;
   const ChatPage({
     super.key,
-    required this.recieverEmail,
+    required this.recieverName,
     required this.recieverID,
   });
 
@@ -91,10 +91,11 @@ class _ChatPageState extends State<ChatPage> {
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.background,
       appBar: AppBar(
-        title: Text(widget.recieverEmail),
+        title: Text(widget.recieverName),
         // backgroundColor: Colors.transparent,
         // foregroundColor: Colors.grey,
         elevation: 0,
+        backgroundColor: Theme.of(context).colorScheme.background,
         automaticallyImplyLeading: false,
         leading: IosButton(onPressed: () => pop(context)),
       ),

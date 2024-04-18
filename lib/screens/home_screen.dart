@@ -17,8 +17,12 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Theme.of(context).colorScheme.background,
       appBar: AppBar(
-        title: const Text("Home"),
+        title: Text(
+          "Home",
+          style: TextStyle(color: Theme.of(context).colorScheme.inversePrimary),
+        ),
         backgroundColor: Colors.transparent,
         foregroundColor: Colors.grey,
         elevation: 0,
@@ -58,14 +62,14 @@ class HomePage extends StatelessWidget {
     //display alll except the current user
     if (userData['email'] != _authService.getCurrentUser()!.email) {
       return UserTile(
-        text: userData['email'],
+        text: userData['name'],
         onTap: () {
           //navigate to chat page
           Navigator.push(
               context,
               MaterialPageRoute(
                 builder: (context) => ChatPage(
-                  recieverEmail: userData['email'],
+                  recieverName: userData['name'],
                   recieverID: userData['uid'],
                 ),
               ));
